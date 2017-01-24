@@ -21,9 +21,8 @@ import './index.css';
 ReactDOM.render(
   <Router history={browserHistory}>
     <Route path="/" component={App}>
-      <Route path="beers" component={BeerPage}>
-        <Route path="/beers/:id" component={BeerDetails}/>
-      </Route>
+      <Route path="beers" component={BeerPage}/>
+      <Route path="beers/:id" component={BeerDetails}/>
       <Route path="*" component={NotFound}/>
     </Route>
   </Router>,

@@ -58,7 +58,6 @@ class BeerPage extends Component {
     return (
       <section className="BeerPage">
         { this.state.loading ? <Loading/> : <BeerList beers={this.state.beers}/> }
-        { this.props.children }
       </section>
     );
   }
