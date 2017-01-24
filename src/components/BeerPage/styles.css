@@ -1,0 +1,49 @@
+.beerList {
+  width     : 100%;
+  display   : inline-flex;
+  flex-flow : column nowrap;
+}
+
+.beerList .beerList_item {
+  height : 40px;
+  width  : 100%;
+}
+
+.beerList .beerList_item .beer {
+  display         : inline-flex;
+  flex-flow       : row nowrap;
+  width           : 50%;
+  height          : 40px;
+  line-height     : 40px;
+  color           : #323232;
+  text-decoration : none;
+}
+
+.beerList .beerList_item .beer:hover {
+  color            : #fff;
+  background-color : mediumaquamarine;
+  cursor           : pointer;
+}
+
+.beerList .beerList_item .beer span {
+  display     : inline-block;
+  height      : inherit;
+  line-height : inherit;
+}
+
+.beerList .beerList_item .beer .beer_img {
+  display : inline-block;
+  height  : 40px;
+}
+
+.beerList .beerList_item .beer .beer_name {
+
+}
+
+.beerList .beerList_item .beer .beer_tagline {
+  font-size : 10px;
+}
+
+.beerList .beerList_item .beer .beer_firstBrew {
+
+}

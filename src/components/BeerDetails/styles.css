@@ -1,0 +1,57 @@
+.beerDetails {
+  display   : inline-flex;
+  flex-flow : row nowrap;
+  width     : 100%;
+}
+
+.beerDetails .beerDetails_img {
+  display : inline-block;
+  width   : 100px;
+  height  : 100%;
+}
+
+.beerDetails .beerDetails_data {
+  display   : inline-flex;
+  flex-flow : column nowrap;
+  color     : #323232;
+  padding   : 0 20px;
+}
+
+.beerDetails .beerDetails_data .name {
+  color : #323232;
+}
+
+.beerDetails .beerDetails_data .tagline {
+  color      : #323232;
+  margin-top : 20px;
+}
+
+.beerDetails .beerDetails_data .description {
+  color      : #323232;
+  font-size  : 12px;
+  margin-top : 20px;
+}
+
+.beerDetails .beerDetails_data .tips {
+  color      : #323232;
+  margin-top : 20px;
+}
+
+.beerDetails .beerDetails_data .pairing {
+  display    : inline-flex;
+  flex-flow  : column nowrap;
+  margin-top : 20px;
+}
+
+.beerDetails .beerDetails_data .pairing ul {
+  padding : 10px 40px;
+}
+
+.beerDetails .beerDetails_data .hops {
+  display   : inline-flex;
+  flex-flow : column nowrap;
+}
+
+.beerDetails .beerDetails_data .hops ul {
+  padding : 10px 40px;
+}

@@ -1,5 +1,5 @@
 // type Beer = {id: number; name: string; tagline: string; first_brewed: string};
-
+import './styles.css';
 import React, {
   Component
 }                     from 'react';
@@ -13,12 +13,13 @@ import {
 export const Loading = () =>
   <span className="beerLoading">loading...</span>;
 
-export const Beer = ({ id, name, tagline, first_brewed }) =>
+export const Beer = ({ id, name, tagline, first_brewed, image_url }) =>
   <li className="beerList_item">
     <Link className="beer" to={`/beers/${id}`}>
+      <img className="beer_img" src={image_url} alt={`${name} image`}/>
       <span className="beer_name">{name}</span>
-      <span className="beer_tagline">{tagline}</span>
-      <span className="beer_firstBrew">{first_brewed}</span>
+      <span className="beer_firstBrew">({first_brewed})</span>
+      <em className="beer_tagline">{tagline}</em>
     </Link>
   </li>;
 
@@ -36,7 +37,7 @@ export class BeerPage extends Component {
   render() {
     let { beers, error, state } = this.props;
     return (
-      <section className="beerPage">
+      <section className="beerPage" style={{padding:'40px 10px'}}>
         { state === requestState.PENDING ? <Loading/> : <BeerList beers={beers}/> }
         { error && 'message' in error ? <p class="beerPage_error">{error.message}</p> : '' }
       </section>

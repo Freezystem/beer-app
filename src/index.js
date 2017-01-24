@@ -26,6 +26,7 @@ import thunkMiddleware  from 'redux-thunk';
 // Components
 import App              from './components/App';
 import NotFound         from './components/NotFound';
+import HomePage         from './components/HomePage';
 import BeerPage         from './components/BeerPage';
 import BeerDetails      from './components/BeerDetails';
 
@@ -47,7 +48,8 @@ const history           = syncHistoryWithStore(browserHistory, store);
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/" component={App}>
+      <Route component={App}>
+        <Route path="/" component={HomePage}/>
         <Route path="beers" component={BeerPage}/>
         <Route path="beers/:id" component={BeerDetails}/>
         <Route path="*" component={NotFound}/>
@@ -56,3 +58,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+
+export default store;

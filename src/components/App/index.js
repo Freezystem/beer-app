@@ -1,4 +1,4 @@
-// @flow
+import './styles.css';
 
 import React, {
   Component
@@ -6,9 +6,9 @@ import React, {
 import { Link }   from 'react-router';
 
 const NavBar = () =>
-  <nav>
-    <Link to="/">home</Link>
-    <Link to="/beers">beers</Link>
+  <nav className="navbar">
+    <Link className="navbar_item" activeClassName={'navbar_item-active'} to="/">home</Link>
+    <Link className="navbar_item" activeClassName={'navbar_item-active'} to="/beers">beers</Link>
   </nav>;
 
 class App extends Component {
