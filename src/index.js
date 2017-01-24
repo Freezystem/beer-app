@@ -1,30 +1,60 @@
 // @flow
 
-//Libs
+import './index.css';
+
+// Libs
 import 'whatwg-fetch';
-import React          from 'react';
-import ReactDOM       from 'react-dom';
+import React            from 'react';
+import ReactDOM         from 'react-dom';
 import {
   Router,
   Route,
   browserHistory
-}                     from 'react-router';
+}                       from 'react-router';
+import {
+  createStore,
+  combineReducers,
+  applyMiddleware,
+  compose
+}                       from 'redux';
+import { Provider }     from 'react-redux';
+import {
+  syncHistoryWithStore,
+  routerReducer,
+  routerMiddleware
+}                       from 'react-router-redux';
+import thunkMiddleware  from 'redux-thunk';
 
 // Components
-import App            from './components/App';
-import NotFound       from './components/NotFound';
-import BeerPage       from './components/BeerPage';
-import BeerDetails    from './components/BeerDetails';
+import App              from './components/App';
+import NotFound         from './components/NotFound';
+import BeerPage         from './components/BeerPage';
+import BeerDetails      from './components/BeerDetails';
 
-import './index.css';
+// Reducers
+import beersReducer     from './components/BeerPage/reducer';
+
+const composer          = process.env.NODE_ENV !== 'production'
+                          && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+                          || compose;
+const rootReducer       = combineReducers({
+                            beers   : beersReducer,
+                            routing : routerReducer
+                          });
+const routingMiddleware = routerMiddleware(browserHistory);
+const middlewares       = composer(applyMiddleware(routingMiddleware, thunkMiddleware));
+const store             = createStore(rootReducer, middlewares);
+const history           = syncHistoryWithStore(browserHistory, store);
 
 ReactDOM.render(
-  <Router history={browserHistory}>
-    <Route path="/" component={App}>
-      <Route path="beers" component={BeerPage}/>
-      <Route path="beers/:id" component={BeerDetails}/>
-      <Route path="*" component={NotFound}/>
-    </Route>
-  </Router>,
+  <Provider store={store}>
+    <Router history={history}>
+      <Route path="/" component={App}>
+        <Route path="beers" component={BeerPage}/>
+        <Route path="beers/:id" component={BeerDetails}/>
+        <Route path="*" component={NotFound}/>
+      </Route>
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );

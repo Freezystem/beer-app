@@ -1,10 +1,14 @@
-// @flow
 // type Beer = {id: number; name: string; tagline: string; first_brewed: string};
 
 import React, {
   Component
-}                 from 'react';
-import { Link }   from 'react-router';
+}                     from 'react';
+import { connect }    from 'react-redux';
+import { Link }       from 'react-router';
+import {
+  getBeers,
+  requestState
+}                     from './reducer';
 
 export const Loading = () =>
   <span className="beerLoading">loading...</span>;
@@ -23,44 +27,35 @@ export const BeerList = ({ beers }) =>
     { Array.isArray(beers) && beers.map(beer => <Beer key={beer.id} {...beer}/>) }
   </ul>;
 
-class BeerPage extends Component {
-  constructor() {
-    super();
-
-    this.state = { beers : [], loading : true };
-  }
-
+export class BeerPage extends Component {
   componentDidMount() {
-    this._getBeers();
-  }
-
-  _getBeers(page = 1, perPage = 20) {
-    this.setState(Object.assign(this.state, { loading : true }));
-
-    return fetch(`https://api.punkapi.com/v2/beers?page=${page}&per_page=${perPage}`)
-      .then(res => {
-        if ( res.status === 200 )
-          return res.json();
-        else
-          throw res.statusText;
-      })
-      .then(beers => {
-        this.setState(Object.assign(this.state, { beers, loading : false }));
-        return beers;
-      })
-      .catch(err => {
-        console.error('error occurred while fetching for beers:', err);
-        this.setState(Object.assign(this.state, { beers : [], loading : false }));
-      });
+    this.props.getBeers();
   }
 
   render() {
+    let { beers, error, state } = this.props;
     return (
-      <section className="BeerPage">
-        { this.state.loading ? <Loading/> : <BeerList beers={this.state.beers}/> }
+      <section className="beerPage">
+        { state === requestState.PENDING ? <Loading/> : <BeerList beers={beers}/> }
+        { error && 'message' in error ? <p class="beerPage_error">{error.message}</p> : '' }
       </section>
     );
   }
 }
 
-export default BeerPage;
+
+const MapStateToProps = state => ({
+  beers  : state.beers.data,
+  state  : state.beers.requestState,
+  error  : state.beers.error
+});
+
+const MapDispatchToProps = dispatch => ({
+  getBeers : ( page, perPage ) => dispatch(getBeers(page, perPage))
+});
+
+export default connect(
+  MapStateToProps,
+  MapDispatchToProps
+)(BeerPage);
+
