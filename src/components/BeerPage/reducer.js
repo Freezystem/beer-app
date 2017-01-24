@@ -29,7 +29,6 @@ export const getBeers = (
   page:number = 1,
   perPage:number = 20
 ) => {
-  console.log('wtf');
   return ( dispatch:any ):void => {
     dispatch(fetchBeers());
 

@@ -29,7 +29,8 @@ export const BeerList = ({ beers }) =>
 
 export class BeerPage extends Component {
   componentDidMount() {
-    this.props.getBeers();
+    let { beers, getBeers } = this.props;
+    (Array.isArray(beers) && beers.length) || getBeers();
   }
 
   render() {
@@ -42,7 +43,6 @@ export class BeerPage extends Component {
     );
   }
 }
-
 
 const MapStateToProps = state => ({
   beers  : state.beers.data,
@@ -58,4 +58,3 @@ export default connect(
   MapStateToProps,
   MapDispatchToProps
 )(BeerPage);
-
