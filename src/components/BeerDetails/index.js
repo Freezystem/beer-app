@@ -45,15 +45,11 @@ const getBeer = (beers = [], id) => {
   return findBeer.length ? findBeer[0] : {};
 };
 
-const MapStateToProps = (state, props) => ({
-  beer    : getBeer(state.beers.data, parseInt(props.params.id, 10))
-});
-
-const MapDispatchToProps = dispatch => ({
-  goBack : () => dispatch(goBack())
+const MapStateToProps = (state, { params }) => ({
+  beer : getBeer(state.beers.data, parseInt(params.id, 10))
 });
 
 export default connect(
   MapStateToProps,
-  MapDispatchToProps
+  { goBack }
 )(BeerDetails);

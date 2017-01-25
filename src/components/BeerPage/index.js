@@ -59,11 +59,7 @@ const MapStateToProps = state => ({
   error  : state.beers.error
 });
 
-const MapDispatchToProps = dispatch => ({
-  getBeers : ( page, perPage ) => dispatch(getBeers(page, perPage))
-});
-
 export default connect(
   MapStateToProps,
-  MapDispatchToProps
+  { getBeers }
 )(BeerPage);
