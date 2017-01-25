@@ -22,6 +22,11 @@ import {
   routerMiddleware
 }                       from 'react-router-redux';
 import thunkMiddleware  from 'redux-thunk';
+import throttle         from 'lodash/throttle';
+import {
+  saveState,
+  loadState
+}                       from './helpers/localStorage';
 
 // Components
 import App              from './components/App';
@@ -33,6 +38,9 @@ import BeerDetails      from './components/BeerDetails';
 // Reducers
 import beersReducer     from './components/BeerPage/reducer';
 
+// App init
+
+const initialState      = Object.assign({}, loadState());
 const composer          = process.env.NODE_ENV !== 'production'
                           && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
                           || compose;
@@ -42,7 +50,7 @@ const rootReducer       = combineReducers({
                           });
 const routingMiddleware = routerMiddleware(browserHistory);
 const middlewares       = composer(applyMiddleware(routingMiddleware, thunkMiddleware));
-const store             = createStore(rootReducer, middlewares);
+const store             = createStore(rootReducer, initialState, middlewares);
 const history           = syncHistoryWithStore(browserHistory, store);
 
 ReactDOM.render(
@@ -58,5 +66,13 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+
+store.subscribe(throttle(() => {
+  saveState({
+    beers : {
+      data : store.getState().beers.data
+    }
+  });
+}, 1000));
 
 export default store;

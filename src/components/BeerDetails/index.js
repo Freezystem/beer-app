@@ -3,7 +3,6 @@ import './styles.css';
 import React            from 'react';
 import { connect }      from 'react-redux';
 import { goBack }       from 'react-router-redux';
-import store            from '../../index';
 
 const BeerDetails = ({ beer, goBack }) => {
   if ( !Object.keys(beer).length ) {
