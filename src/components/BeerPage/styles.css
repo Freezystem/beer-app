@@ -13,6 +13,7 @@
   display         : inline-flex;
   flex-flow       : row nowrap;
   width           : 50%;
+  min-width       : 720px;
   height          : 40px;
   line-height     : 40px;
   color           : #323232;

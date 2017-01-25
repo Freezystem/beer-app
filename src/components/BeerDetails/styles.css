@@ -55,3 +55,16 @@
 .beerDetails .beerDetails_data .hops ul {
   padding : 10px 40px;
 }
+
+.beerDetails .beerDetails_data .back {
+  width            : 200px;
+  height           : 30px;
+  line-height      : 30px;
+  color            : #fff;
+  border           : none;
+  border-radius    : 4px;
+  text-align       : center;
+  text-transform   : uppercase;
+  background-color : mediumaquamarine;
+  cursor           : pointer;
+}

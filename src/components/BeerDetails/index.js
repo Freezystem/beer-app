@@ -33,7 +33,7 @@ const BeerDetails = ({ beer, goBack }) => {
               {Array.isArray(hops) && hops.map(( hop, id ) => <li key={id}>{hop.name} ({hop.amount.value}{hop.amount.unit})</li>)}
             </ul>
           </div>
-          <button onClick={goBack}>back to beers</button>
+          <button className="back" onClick={goBack}>back to beers</button>
         </div>
       </section>
     );
