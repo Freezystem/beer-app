@@ -16,7 +16,7 @@ export const Loading = () =>
 export const Beer = ({ id, name, tagline, first_brewed, image_url }) =>
   <li className="beerList_item">
     <Link className="beer" to={`/beers/${id}`}>
-      <img className="beer_img" src={image_url} alt={`${name}`}/>
+      <div className="beer_img" style={{backgroundImage:`url(${image_url})`}}/>
       <span className="beer_name">{name}</span>
       <span className="beer_firstBrew">({first_brewed})</span>
       <em className="beer_tagline">{tagline}</em>
@@ -28,16 +28,23 @@ export const BeerList = ({ beers }) =>
     { Array.isArray(beers) && beers.map(beer => <Beer key={beer.id} {...beer}/>) }
   </ul>;
 
+export const BeerPagination = ({ page, changePage }) =>
+  <label className="beerPagination" htmlFor="page">
+    <span>Page:</span>
+    <input id="page" type="number" step="1" min="1" value={page} onChange={e => changePage(e.target.value || 1)}/>
+  </label>;
+
 export class BeerPage extends Component {
   componentDidMount() {
-    let { beers, getBeers } = this.props;
-    (Array.isArray(beers) && beers.length) || getBeers();
+    let { beers, page, getBeers } = this.props;
+    (Array.isArray(beers) && beers.length) || getBeers(page);
   }
 
   render() {
-    let { beers, error, state } = this.props;
+    let { beers, page, error, state, getBeers } = this.props;
     return (
       <section className="beerPage" style={{padding:'40px 10px'}}>
+        <BeerPagination page={page} changePage={getBeers}/>
         { state === requestState.PENDING ? <Loading/> : <BeerList beers={beers}/> }
         { error && 'message' in error ? <p class="beerPage_error">{error.message}</p> : '' }
       </section>
@@ -47,6 +54,7 @@ export class BeerPage extends Component {
 
 const MapStateToProps = state => ({
   beers  : state.beers.data,
+  page   : state.beers.page,
   state  : state.beers.requestState,
   error  : state.beers.error
 });

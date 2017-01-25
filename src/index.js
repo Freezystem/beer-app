@@ -70,7 +70,8 @@ ReactDOM.render(
 store.subscribe(throttle(() => {
   saveState({
     beers : {
-      data : store.getState().beers.data
+      data : store.getState().beers.data,
+      page : store.getState().beers.page
     }
   });
 }, 1000));
