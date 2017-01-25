@@ -1,10 +1,10 @@
-// type Beer = {id: number; name: string; tagline: string; first_brewed: string};
 import './styles.css';
 import React, {
   Component
 }                     from 'react';
 import { connect }    from 'react-redux';
 import { Link }       from 'react-router';
+import debounce       from 'lodash/debounce';
 import {
   getBeers,
   requestState
@@ -28,11 +28,25 @@ export const BeerList = ({ beers }) =>
     { Array.isArray(beers) && beers.map(beer => <Beer key={beer.id} {...beer}/>) }
   </ul>;
 
-export const BeerPagination = ({ page, changePage }) =>
-  <label className="beerPagination" htmlFor="page">
-    <span>Page:</span>
-    <input id="page" type="number" step="1" min="1" value={page} onChange={e => changePage(e.target.value || 1)}/>
-  </label>;
+export class BeerPagination extends Component {
+  render() {
+    let { page, changePage } = this.props;
+    let _label;
+
+    return (
+      <label className="beerPagination" htmlFor="page">
+        <span>Page:</span>
+        <input id="page"
+               type="number"
+               step="1"
+               min="1"
+               ref={input => _label = input}
+               defaultValue={page}
+               onChange={debounce(() => changePage(_label.value || 1), 500)}/>
+      </label>
+    );
+  }
+}
 
 export class BeerPage extends Component {
   componentDidMount() {
@@ -41,11 +55,14 @@ export class BeerPage extends Component {
   }
 
   render() {
-    let { beers, page, error, state, getBeers } = this.props;
-    return (
+    let { beers, page, error, loading, getBeers, params, children } = this.props;
+
+    let body = (<section className="beerPage" style={{padding:'40px 10px'}}>{ children }</section>);
+
+    return params.id ? body : (
       <section className="beerPage" style={{padding:'40px 10px'}}>
         <BeerPagination page={page} changePage={getBeers}/>
-        { state === requestState.PENDING ? <Loading/> : <BeerList beers={beers}/> }
+        { loading ? <Loading/> : <BeerList beers={beers}/> }
         { error && 'message' in error ? <p class="beerPage_error">{error.message}</p> : '' }
       </section>
     );
@@ -53,10 +70,10 @@ export class BeerPage extends Component {
 }
 
 const MapStateToProps = state => ({
-  beers  : state.beers.data,
-  page   : state.beers.page,
-  state  : state.beers.requestState,
-  error  : state.beers.error
+  beers   : state.beers.data,
+  page    : state.beers.page,
+  loading : state.beers.requestState === requestState.PENDING,
+  error   : state.beers.error
 });
 
 export default connect(
