@@ -13,5 +13,5 @@ declare type beer = {
 declare type beerState  = { requestState:string; data:beer|{}; id:number; error:Error|null };
 declare type beersState = { requestState:string; data:beer[]; page:number; error:Error|null };
 
-declare type action     = { type:string; [string]:any };
+declare type action     = { type:string };
 declare type dispatch   = ( action:action ) => void;

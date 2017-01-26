@@ -12,13 +12,13 @@ export { requestState };
 
 // Actions
 
-export const fetchBeer         = ( id:number ):{ type:string; id:number } =>
+export const fetchBeer         = ( id:number ):action & { id:number } =>
   ({ type : FETCH_BEER, id });
 
-export const fetchBeerSuccess  = ( data:beer ):{ type:string; data:beer } =>
+export const fetchBeerSuccess  = ( data:beer ):action & { data:beer } =>
   ({ type : FETCH_BEER_SUCCESS, data });
 
-export const fetchBeerError    = ( error:Object ):{ type:string; error:Error } =>
+export const fetchBeerError    = ( error:Object ):action & { error:Error } =>
   ({ type : FETCH_BEER_ERROR, error });
 
 // Fetch
@@ -65,7 +65,7 @@ const beerReducer = (
     id           : 0,
     error        : null
   },
-  action:{ type:string; data?:beer; id?:number; error?:Error }
+  action:action & { data?:beer; id?:number; error?:Error }
 ):beerState => {
   switch ( action.type ) {
     case FETCH_BEER:
