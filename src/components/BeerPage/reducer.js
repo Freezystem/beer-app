@@ -18,7 +18,7 @@ export const fetchBeers         = ( page:number ):{ type:string, page:number } =
 export const fetchBeersSuccess  = ( data:beer[] ):{ type:string, data:beer[] } =>
   ({ type : FETCH_BEERS_SUCCESS, data });
 
-export const fetchBeersError    = ( error:Object ):{ type:string, error:Object } =>
+export const fetchBeersError    = ( error:Object ):{ type:string, error:Error } =>
   ({ type : FETCH_BEERS_ERROR, error });
 
 // Fetch
@@ -58,7 +58,7 @@ const beersReducer = (
     page         : 1,
     error        : null
   },
-  action:{ type:string, data?:beer[], page?:number, error?:Object }
+  action:{ type:string, data?:beer[], page?:number, error?:Error }
 ):beersState => {
   switch ( action.type ) {
     case FETCH_BEERS:

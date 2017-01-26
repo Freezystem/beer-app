@@ -4,7 +4,7 @@ const localStorage:Object|null = window.localStorage || null;
 
 export const loadState = ():Object => {
   try {
-    const serializedState:string = localStorage ? localStorage.getItem('state') : null;
+    const serializedState:string = localStorage ? localStorage.getItem('state') : '';
     return serializedState ? JSON.parse(serializedState) : {};
   }
   catch ( err ) {

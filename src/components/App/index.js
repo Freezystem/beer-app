@@ -1,8 +1,8 @@
+// @flow
+
 import './styles.css';
 
-import React, {
-  Component
-}                 from 'react';
+import React      from 'react';
 import { Link }   from 'react-router';
 
 const NavBar = () =>
@@ -11,15 +11,10 @@ const NavBar = () =>
     <Link className="navbar_item" activeClassName={'navbar_item-active'} to="/beers">beers</Link>
   </nav>;
 
-class App extends Component {
-  render() {
-    return (
-      <section className="App">
-        <NavBar/>
-        { this.props.children }
-      </section>
-    );
-  }
-}
+const App = ({ children }:{ children:React$Element<any> }) =>
+  <section className="App">
+    <NavBar/>
+    { children }
+  </section>;
 
 export default App;

@@ -1,3 +1,5 @@
+// @flow
+
 import './styles.css';
 
 import React, {
@@ -12,10 +14,19 @@ import {
 }                       from './reducer.js';
 
 class BeerDetails extends Component {
-  componentDidMount() {
-    let { beers, beer, params } = this.props;
+  props:{
+    loading:boolean;
+    error:Error;
+    beers:beer[];
+    beer:beer;
+    params:Object;
+    getBeer:(id:number) => void;
+    push:(url:string) => void
+  };
 
-    let id = parseInt(params.id, 10);
+  componentDidMount() {
+    const { beers, beer, params } = this.props,
+          id = parseInt(params.id, 10);
 
     if ( isEmpty(beer) || beer.id !== id ) {
       this.props.getBeer(id, beers);
@@ -23,17 +34,16 @@ class BeerDetails extends Component {
   }
 
   render() {
-    let { beer, loading, error, push } = this.props;
+    const { beer, loading, error, push } = this.props;
 
-    console.log(beer);
-    let body = <p>loading...</p>;
+    let body:React$Element<any> = <p>loading...</p>;
 
     if ( error ) {
       body = <p>{error.message}</p>;
     }
     else if ( !loading && !isEmpty(beer) ) {
-      let { name, first_brewed, tagline, description, food_pairing, brewers_tips, ingredients, image_url } = beer;
-      let { hops } = ingredients;
+      const { name, first_brewed, tagline, description, food_pairing, brewers_tips, ingredients, image_url } = beer,
+            { hops } = ingredients;
 
 
       body = <section className="beerDetails">
