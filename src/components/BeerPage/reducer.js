@@ -42,7 +42,7 @@ export const getBeers = (
           dispatch(fetchBeersSuccess(beers));
         }
         else {
-          throw new Error('no beer at this page');
+          throw new Error('Oups! No beer at this page, sorry...');
         }
       })
       .catch(err => dispatch(fetchBeersError(err)));
