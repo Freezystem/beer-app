@@ -1,2 +1,5 @@
 [include]
 ./src/**/*.js
+
+[libs]
+./src/flowglobals.js
