@@ -7,6 +7,7 @@ import React, {
 import { connect }    from 'react-redux';
 import { Link }       from 'react-router';
 import debounce       from 'lodash/debounce';
+import moment         from 'moment';
 import {
   getBeers,
   requestState
@@ -21,7 +22,7 @@ export const Beer = ({ id, name, tagline, first_brewed, image_url }:beer) =>
     <Link className="beer" to={`/beers/${id}`}>
       <div className="beer_img" style={{backgroundImage:`url(${image_url})`}}/>
       <span className="beer_name">{name}</span>
-      <span className="beer_firstBrew">({first_brewed})</span>
+      <span className="beer_firstBrew">first brewed in {moment(first_brewed, "MM/YYYY").format('MMMM Y')}</span>
       <em className="beer_tagline">{tagline}</em>
     </Link>
   </li>;
