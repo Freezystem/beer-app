@@ -20,6 +20,8 @@ export const Loading = () =>
     <span className="dot"></span>
   </p>;
 
+export const ErrorMessage = ({ text }:{text:string}) =>
+  <p className="beerPage_error">{text}</p>;
 
 export const Beer = ({ id, name, tagline, first_brewed, image_url }:beer) =>
   <li className="beerList_item">
@@ -86,7 +88,7 @@ export class BeerPage extends Component {
         <section className="beerPage" style={{padding:'40px 10px'}}>
           <BeerPagination page={page} changePage={getBeers}/>
           { loading ? <Loading/> : <BeerList beers={beers}/> }
-          { error && 'message' in error ? <p className="beerPage_error">{error.message}</p> : '' }
+          { error && 'message' in error ? <ErrorMessage text={error.message}/> : '' }
         </section>
       );
   }

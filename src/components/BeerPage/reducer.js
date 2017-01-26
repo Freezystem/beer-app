@@ -32,10 +32,12 @@ export const getBeers = (
 
     fetch(`https://api.punkapi.com/v2/beers?page=${page}&per_page=${perPage}`)
       .then(( res:Object ):Promise<beer[]> => {
-        if ( res.status === 200 )
+        if ( res.status === 200 ) {
           return res.json();
-        else
-          throw new Error(res.statusText);
+        }
+        else {
+          throw new Error(res.statusText || 'Sorry, an unknown error occurred...');
+        }
       })
       .then(( beers:beer[] ):void => {
         if (Array.isArray(beers) && beers.length) {

@@ -1,24 +1,37 @@
 .beerDetails {
-  display   : inline-flex;
-  flex-flow : row nowrap;
-  width     : 100%;
-}
-
-.beerDetails .beerDetails_img {
-  display : inline-block;
-  width   : 100px;
-  height  : 100%;
+  padding          : 10px;
+  width            : 100%;
+  border-radius    : 4px;
+  background-color : #fff;
+  box-shadow       : 0 1px 1px rgba(0, 0, 0, .4);
+  overflow         : hidden;
 }
 
 .beerDetails .beerDetails_data {
-  display   : inline-flex;
-  flex-flow : column nowrap;
-  color     : #323232;
-  padding   : 0 20px;
+  display     : inline-flex;
+  flex-flow   : column nowrap;
+  align-items : center;
+  width       : 100%;
+  color       : #323232;
+}
+
+.beerDetails .beerDetails_data .img {
+  display             : inline-block;
+  width               : 100px;
+  height              : 100px;
+  border-radius       : 50%;
+  border              : 2px solid mediumaquamarine;
+  background-position : center center;
+  background-color    : #fff;
+  background-repeat   : no-repeat;
+  background-size     : contain;
+  box-shadow          : 0 1px 1px rgba(0, 0, 0, .4);
 }
 
 .beerDetails .beerDetails_data .name {
-  color : #323232;
+  color       : #323232;
+  font-family : Lobster, serif;
+  margin-top  : 20px;
 }
 
 .beerDetails .beerDetails_data .tagline {
@@ -30,28 +43,53 @@
   color      : #323232;
   font-size  : 12px;
   margin-top : 20px;
+  max-width  : 680px;
 }
 
 .beerDetails .beerDetails_data .tips {
-  color      : #323232;
-  margin-top : 20px;
+  display       : inline-flex;
+  flex-flow     : row nowrap;
+  color         : #fff;
+  font-size     : 12px;
+  border        : 2px solid #c3c3c3;
+  border-radius : 4px;
+  margin-top    : 20px;
+  max-width     : 680px;
 }
 
-.beerDetails .beerDetails_data .pairing {
-  display    : inline-flex;
-  flex-flow  : column nowrap;
-  margin-top : 20px;
+.beerDetails .beerDetails_data .tips span:first-child {
+  display          : inline-block;
+  min-width        : 100px;
+  padding          : 10px;
+  vertical-align   : middle;
+  background-color : #c3c3c3;
 }
 
-.beerDetails .beerDetails_data .pairing ul {
-  padding : 10px 40px;
+.beerDetails .beerDetails_data .tips span:last-child {
+  display : inline-block;
+  padding : 10px;
+  color   : #c3c3c3;
 }
 
+.beerDetails .beerDetails_data .pairing,
 .beerDetails .beerDetails_data .hops {
-  display   : inline-flex;
-  flex-flow : column nowrap;
+  display     : inline-flex;
+  flex-flow   : column nowrap;
+  align-items : center;
+  margin-top  : 20px;
+  width       : 680px;
 }
 
+.beerDetails .beerDetails_data .pairing p,
+.beerDetails .beerDetails_data .hops p {
+  width         : 100%;
+  text-align    : center;
+  border        : 2px dashed mediumaquamarine;
+  padding       : 10px;
+  border-radius : 4px;
+}
+
+.beerDetails .beerDetails_data .pairing ul,
 .beerDetails .beerDetails_data .hops ul {
   padding : 10px 40px;
 }
@@ -67,4 +105,10 @@
   text-transform   : uppercase;
   background-color : mediumaquamarine;
   cursor           : pointer;
+  box-shadow       : 0 1px 1px rgba(0, 0, 0, .4);
+  margin-top       : 20px;
+}
+
+.beerDetails .beerDetails_data .back:hover {
+  box-shadow       : inset 0 1px 1px rgba(0, 0, 0, .4);
 }

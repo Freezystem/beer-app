@@ -52,6 +52,7 @@
   margin              : 5px 0;
   border              : 2px solid mediumaquamarine;
   border-radius       : 50%;
+  box-shadow          : 0 1px 1px rgba(0, 0, 0, .4);
 }
 
 .beerList .beerList_item .beer .beer_name {
@@ -151,6 +152,7 @@
   left             : 0;
   right            : 0;
   margin           : auto;
+  box-shadow       : 0 1px 1px rgba(0, 0, 0, .4);
   animation        : loading 2s infinite;
 }
 

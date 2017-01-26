@@ -9,11 +9,16 @@ import { connect }      from 'react-redux';
 import { push }         from 'react-router-redux';
 import isEmpty          from 'lodash/isEmpty';
 import {
+  Loading,
+  ErrorMessage
+}                       from '../BeerPage';
+import moment           from 'moment';
+import {
   getBeer,
   requestState
 }                       from './reducer.js';
 
-class BeerDetails extends Component {
+export class BeerDetails extends Component {
   props:{
     loading:boolean;
     error:Error;
@@ -36,23 +41,25 @@ class BeerDetails extends Component {
   render() {
     const { beer, loading, error, push } = this.props;
 
-    let body:React$Element<any> = <p>loading...</p>;
+    let body:React$Element<any> = <Loading/>;
 
     if ( error ) {
-      body = <p>{error.message}</p>;
+      body = <ErrorMessage text={error.message}/>;
     }
     else if ( !loading && !isEmpty(beer) ) {
       const { name, first_brewed, tagline, description, food_pairing, brewers_tips, ingredients, image_url } = beer,
             { hops } = ingredients;
 
 
-      body = <section className="beerDetails">
-          <img className="beerDetails_img" src={image_url} alt={`${name}`}/>
-          <div className="beerDetails_data">
-            <h2 className="name">{name} - {first_brewed}</h2>
+      body = <div className="beerDetails_data">
+            <div className="img" style={{backgroundImage:`url(${image_url})`}}></div>
+            <h2 className="name">{name} - {moment(first_brewed, "MM/YYYY").format('MMMM Y')}</h2>
             <em className="tagline">{tagline}</em>
             <p className="description">{description}</p>
-            <p className="tips">brewing tips : {brewers_tips}</p>
+            <p className="tips">
+              <span>brewing tips:</span>
+              <span>{brewers_tips}</span>
+            </p>
             <div className="pairing">
               <p>food pairing:</p>
               <ul>
@@ -66,11 +73,10 @@ class BeerDetails extends Component {
               </ul>
             </div>
             <button className="back" onClick={() => push('/beers')}>back to beers</button>
-          </div>
-        </section>;
+          </div>;
     }
 
-    return (<section className="beerDetails" style={{paddingTop:40}}>{body}</section>);
+    return (<section className="beerDetails">{body}</section>);
   }
 }
 
