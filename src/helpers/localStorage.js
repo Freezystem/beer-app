@@ -1,8 +1,10 @@
-const localStorage = window.localStorage || null;
+// @flow
 
-export const loadState = () => {
+const localStorage:Object|null = window.localStorage || null;
+
+export const loadState = ():Object => {
   try {
-    const serializedState = localStorage ? localStorage.getItem('state') : null;
+    const serializedState:string = localStorage ? localStorage.getItem('state') : null;
     return serializedState ? JSON.parse(serializedState) : {};
   }
   catch ( err ) {
@@ -11,7 +13,7 @@ export const loadState = () => {
   }
 };
 
-export const saveState = state => {
+export const saveState = ( state:Object ):void => {
   try {
     localStorage && localStorage.setItem('state', JSON.stringify(state));
   }

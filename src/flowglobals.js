@@ -10,8 +10,8 @@ declare type beer = {
   image_url:string
 };
 
-declare type beerState  = { requestState:string; data:beer|{}; id:number; error:?Object };
-declare type beersState = { requestState:string; data:beer[]; page:number; error:?Object };
+declare type beerState  = { requestState:string; data:beer|{}; id:number; error:Object|null };
+declare type beersState = { requestState:string; data:beer[]; page:number; error:Object|null };
 
 declare type action     = { type:string; [string]:any };
 declare type dispatch   = ( action:action ) => void;
