@@ -1,6 +1,6 @@
 // @flow
 
-import requestState   from '../../helpers/requestState';
+import requestState   from '../helpers/requestState';
 
 // Constants
 

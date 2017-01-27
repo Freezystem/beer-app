@@ -11,7 +11,7 @@ import moment         from 'moment';
 import {
   getBeers,
   requestState
-}                     from './reducer';
+}                     from '../../reducers/beers';
 
 export const Loading = () =>
   <p className="beerLoading">

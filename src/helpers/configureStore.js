@@ -22,8 +22,8 @@ import {
 import isEmpty          from 'lodash/isEmpty';
 
 // Reducers
-import beersReducer     from '../components/BeerPage/reducer';
-import beerReducer      from '../components/BeerDetails/reducer';
+import beersReducer     from '../reducers/beers';
+import beerReducer      from '../reducers/beer';
 
 export const saveToLocalStorage = ( store:Object, stateToSave:Object = {}, interval:number = 1000 ) => {
   !isEmpty(stateToSave) && store.subscribe(throttle(() => {

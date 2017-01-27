@@ -16,7 +16,7 @@ import moment           from 'moment';
 import {
   getBeer,
   requestState
-}                       from './reducer.js';
+}                       from '../../reducers/beer.js';
 
 export class BeerDetails extends Component {
   props:{
