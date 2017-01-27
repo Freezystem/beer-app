@@ -32,8 +32,7 @@ export const saveToLocalStorage = ( store:Object, stateToSave:Object = {}, inter
 };
 
 const configureStore = ():Object => {
-  // eslint-disable-next-line
-  const composer          = process.env.NODE_ENV !== 'production' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const composer          = ( process.env.NODE_ENV !== 'production' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ) || compose;
   const initialState      = Object.assign({}, loadState());
   const rootReducer       = combineReducers({
     currentBeer : beerReducer,
