@@ -2,4 +2,4 @@
 ./src/**/*.js
 
 [libs]
-./src/flowglobals.js
+./src/helpers/flowGlobals.js
