@@ -37,7 +37,7 @@ export const getBeer = (
     }
     else {
       fetch(`https://api.punkapi.com/v2/beers/${id}`)
-        .then(( res:Object ):Promise<beer[]>  => {
+        .then(( res:Object ):Promise<beer[]> => {
           if ( res.status === 200 ) {
             return res.json();
           }
