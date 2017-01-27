@@ -11,24 +11,11 @@ import {
   Route,
   browserHistory
 }                       from 'react-router';
-import {
-  createStore,
-  combineReducers,
-  applyMiddleware,
-  compose
-}                       from 'redux';
 import { Provider }     from 'react-redux';
 import {
-  syncHistoryWithStore,
-  routerReducer,
-  routerMiddleware
+  syncHistoryWithStore
 }                       from 'react-router-redux';
-import thunkMiddleware  from 'redux-thunk';
-import throttle         from 'lodash/throttle';
-import {
-  saveState,
-  loadState
-}                       from './helpers/localStorage';
+import configureStore   from './helpers/configureStore';
 
 // Components
 import App              from './components/App';
@@ -37,24 +24,9 @@ import HomePage         from './components/HomePage';
 import BeerPage         from './components/BeerPage';
 import BeerDetails      from './components/BeerDetails';
 
-// Reducers
-import beersReducer     from './components/BeerPage/reducer';
-import beerReducer      from './components/BeerDetails/reducer';
-
 // App init
-
-const initialState      = Object.assign({}, loadState());
-// eslint-disable-next-line
-const composer          = process.env.NODE_ENV !== 'production' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const rootReducer       = combineReducers({
-                            currentBeer : beerReducer,
-                            beers       : beersReducer,
-                            routing     : routerReducer
-                          });
-const routingMiddleware = routerMiddleware(browserHistory);
-const middlewares       = composer(applyMiddleware(routingMiddleware, thunkMiddleware));
-const store             = createStore(rootReducer, initialState, middlewares);
-const history           = syncHistoryWithStore(browserHistory, store);
+const store                   = configureStore();
+const history                 = syncHistoryWithStore(browserHistory, store);
 
 ReactDOM.render(
   <Provider store={store}>
@@ -70,18 +42,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
-
-store.subscribe(throttle(() => {
-  saveState({
-    currentBeer : {
-      data : store.getState().currentBeer.data,
-      id   : store.getState().currentBeer.id
-    },
-    beers : {
-      data : store.getState().beers.data,
-      page : store.getState().beers.page
-    }
-  });
-}, 1000));
-
-export default store;

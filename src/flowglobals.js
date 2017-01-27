@@ -15,3 +15,5 @@ declare type beersState = { requestState:string; data:beer[]; page:number; error
 
 declare type action     = { type:string };
 declare type dispatch   = ( action:action ) => void;
+
+declare type stateToSave = { currentBeer:{ data:beer; id:number }; beers:{ data:beer[]; page:number } };
