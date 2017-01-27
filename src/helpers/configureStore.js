@@ -1,6 +1,5 @@
 // @flow
 
-import React            from 'react';
 import {
   browserHistory
 }                       from 'react-router';
@@ -34,17 +33,17 @@ export const saveToLocalStorage = ( store:Object, stateToSave:Object = {}, inter
 
 const configureStore = ():Object => {
   // eslint-disable-next-line
-  const composer                = process.env.NODE_ENV !== 'production' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-  const initialState            = Object.assign({}, loadState());
-  const rootReducer             = combineReducers({
+  const composer          = process.env.NODE_ENV !== 'production' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const initialState      = Object.assign({}, loadState());
+  const rootReducer       = combineReducers({
     currentBeer : beerReducer,
     beers       : beersReducer,
     routing     : routerReducer
   });
-  const routingMiddleware       = routerMiddleware(browserHistory);
-  const middlewares             = composer(applyMiddleware(routingMiddleware, thunkMiddleware));
-  const store                   = createStore(rootReducer, initialState, middlewares);
-  const stateToSave:stateToSave = {
+  const routingMiddleware = routerMiddleware(browserHistory);
+  const middlewares       = composer(applyMiddleware(routingMiddleware, thunkMiddleware));
+  const store             = createStore(rootReducer, initialState, middlewares);
+  const stateToSave       = {
     currentBeer : {
       data : store.getState().currentBeer.data,
       id   : store.getState().currentBeer.id
