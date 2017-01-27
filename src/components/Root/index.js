@@ -36,5 +36,4 @@ const Root = ( { store }:Object ) => {
   );
 }
 
-
 export default Root;
