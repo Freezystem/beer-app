@@ -1,7 +1,8 @@
 .beerList {
-  width     : 100%;
-  display   : inline-flex;
-  flex-flow : row wrap;
+  width           : 100%;
+  display         : inline-flex;
+  flex-flow       : row wrap;
+  justify-content : center;
 }
 
 .beerList .beerList_item {
