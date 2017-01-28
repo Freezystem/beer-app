@@ -12,13 +12,13 @@ export { requestState };
 
 // Actions
 
-export const fetchBeers         = ( page:number ):action & { page:number } =>
+export const fetchBeers         = ( page:number ):action<{ page:number }> =>
   ({ type : FETCH_BEERS, page });
 
-export const fetchBeersSuccess  = ( data:beer[] ):action & { data:beer[] } =>
+export const fetchBeersSuccess  = ( data:beer[] ):action<{ data:beer[] }> =>
   ({ type : FETCH_BEERS_SUCCESS, data });
 
-export const fetchBeersError    = ( error:Object ):action & { error:Error } =>
+export const fetchBeersError    = ( error:Object ):action<{ error:Error }> =>
   ({ type : FETCH_BEERS_ERROR, error });
 
 // Fetch
@@ -60,7 +60,7 @@ const beersReducer = (
     page         : 1,
     error        : null
   },
-  action:action & { data?:beer[], page?:number, error?:Error }
+  action:action<{ data?:beer[], page?:number, error?:Error }>
 ):beersState => {
   switch ( action.type ) {
     case FETCH_BEERS:
