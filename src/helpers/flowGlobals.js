@@ -18,3 +18,4 @@ declare type beersState = { requestState:string; data:beer[]; page:number; error
 // P = payload
 declare type action<P:Object> = { type:string } & P;
 declare type dispatch         = ( action:action ) => action;
+declare type unsubscriber     = () => void;

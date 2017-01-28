@@ -25,8 +25,10 @@ import isEmpty          from 'lodash/isEmpty';
 import beersReducer     from '../reducers/beers';
 import beerReducer      from '../reducers/beer';
 
-export const saveToLocalStorage = ( store:Object, stateToSave:Object = {}, interval:number = 1000 ):void => {
-  !isEmpty(stateToSave) && store.subscribe(throttle(() => saveState(stateToSave), interval));
+export let stopSavingToLocalStorage:unsubscriber|null = null;
+
+export const saveToLocalStorage = ( store:Object, stateToSave:Object = {}, interval:number = 1000 ):unsubscriber|null => {
+  return isEmpty(stateToSave) ? null : store.subscribe(throttle(() => saveState(stateToSave), interval));
 };
 
 const configureStore = ():Object => {
@@ -51,7 +53,8 @@ const configureStore = ():Object => {
     }
   };
 
-  saveToLocalStorage(store, stateToSave);
+  typeof stopSavingToLocalStorage === 'function' && stopSavingToLocalStorage();
+  stopSavingToLocalStorage = saveToLocalStorage(store, stateToSave);
 
   return store;
 };
