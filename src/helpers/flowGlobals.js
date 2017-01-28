@@ -16,5 +16,5 @@ declare type beerState  = { requestState:string; data:beer|{}; id:number; error:
 declare type beersState = { requestState:string; data:beer[]; page:number; error:Error|null };
 
 // P = payload
-declare type action<P:Object>  = { type:string } & P;
-declare type dispatch   = ( action:action ) => action;
+declare type action<P:Object> = { type:string } & P;
+declare type dispatch         = ( action:action ) => action;

@@ -26,9 +26,7 @@ import beersReducer     from '../reducers/beers';
 import beerReducer      from '../reducers/beer';
 
 export const saveToLocalStorage = ( store:Object, stateToSave:Object = {}, interval:number = 1000 ):void => {
-  !isEmpty(stateToSave) && store.subscribe(throttle(() => {
-    saveState(stateToSave);
-  }, interval));
+  !isEmpty(stateToSave) && store.subscribe(throttle(() => saveState(stateToSave), interval));
 };
 
 const configureStore = ():Object => {
