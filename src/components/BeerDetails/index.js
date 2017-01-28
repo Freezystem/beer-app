@@ -4,19 +4,19 @@ import './styles.css';
 
 import React, {
   Component
-}                       from 'react';
-import { connect }      from 'react-redux';
-import { push }         from 'react-router-redux';
-import isEmpty          from 'lodash/isEmpty';
+}                     from 'react';
+import { connect }    from 'react-redux';
+import { push }       from 'react-router-redux';
+import isEmpty        from 'lodash/isEmpty';
 import {
   Loading,
   ErrorMessage
-}                       from '../BeerPage';
-import moment           from 'moment';
+}                     from '../BeerPage';
+import moment         from 'moment';
 import {
   getBeer,
   requestState
-}                       from '../../reducers/beer.js';
+}                     from '../../reducers/beer.js';
 
 export class BeerDetails extends Component {
   props:{
@@ -53,7 +53,7 @@ export class BeerDetails extends Component {
 
       body = <div className="beerDetails_data">
             <div className="img" style={{backgroundImage:`url(${image_url})`}}></div>
-            <h2 className="name">{name} - {moment(first_brewed, "MM/YYYY").format('MMMM Y')}</h2>
+            <h2 className="name">{name} - {moment(first_brewed, 'MM/YYYY').format('MMMM Y')}</h2>
             <em className="tagline">{tagline}</em>
             <p className="description">{description}</p>
             <p className="tips">

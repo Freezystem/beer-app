@@ -1,3 +1,5 @@
+// @flow
+
 declare type beer = {
   id:number;
   name:string;
@@ -15,3 +17,5 @@ declare type beersState = { requestState:string; data:beer[]; page:number; error
 
 declare type action     = { type:string };
 declare type dispatch   = ( action:action ) => void;
+
+export { beer, beerState, beersState, action, dispatch };

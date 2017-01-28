@@ -28,7 +28,7 @@ export const Beer = ({ id, name, tagline, first_brewed, image_url }:beer) =>
     <Link className="beer" to={`/beers/${id}`}>
       <div className="beer_img" style={{backgroundImage:`url(${image_url})`}}/>
       <span className="beer_name">{name}</span>
-      <span className="beer_firstBrew">first brewed in {moment(first_brewed, "MM/YYYY").format('MMMM Y')}</span>
+      <span className="beer_firstBrew">first brewed in {moment(first_brewed, 'MM/YYYY').format('MMMM Y')}</span>
       <em className="beer_tagline">{tagline}</em>
     </Link>
   </li>;
@@ -82,15 +82,24 @@ export class BeerPage extends Component {
   render() {
     const { beers, page, error, loading, getBeers, params, children } = this.props;
 
-    return params.id ?
-      (<section className="beerPage" style={{padding:'40px 10px'}}>{ children }</section>) :
-      (
-        <section className="beerPage" style={{padding:'40px 10px'}}>
-          <BeerPagination page={page} changePage={getBeers}/>
-          { loading ? <Loading/> : <BeerList beers={beers}/> }
-          { error && 'message' in error ? <ErrorMessage text={error.message}/> : '' }
-        </section>
-      );
+    if ( params.id ) {
+      return <section className="beerPage" style={{padding:'40px 10px'}}>{ children }</section>;
+    }
+    else {
+      let body = <BeerList beers={beers}/>;
+
+      if ( loading ) {
+        body = <Loading/>;
+      }
+      else if ( error ) {
+        body = <ErrorMessage text={error.message}/>;
+      }
+
+      return <section className="beerPage" style={{padding:'40px 10px'}}>
+               <BeerPagination page={page} changePage={getBeers}/>
+               { body }
+             </section>;
+    }
   }
 }
 
