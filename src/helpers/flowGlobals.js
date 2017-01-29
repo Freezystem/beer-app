@@ -21,3 +21,4 @@ declare type dispatch         = ( action:action ) => action;
 declare type unsubscriber     = () => void;
 
 declare type language = { code:string; label:string };
+declare type link     = { href:string; label:string };

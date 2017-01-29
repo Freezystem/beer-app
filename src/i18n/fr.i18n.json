@@ -16,5 +16,9 @@
     "brewing_tips" : "conseil de brassage :",
     "food_pairing" : "plats associés :",
     "hops" : "houblons :"
+  },
+  "NavBar" : {
+    "home" : "accueil",
+    "beers" : "bières"
   }
 }

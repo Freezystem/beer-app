@@ -16,5 +16,9 @@
     "brewing_tips" : "brewing tips:",
     "food_pairing" : "food pairing:",
     "hops" : "hops:"
+  },
+  "NavBar" : {
+    "home" : "home",
+    "beers" : "beers"
   }
 }
