@@ -20,5 +20,10 @@
   "NavBar" : {
     "home" : "accueil",
     "beers" : "bières"
+  },
+  "LangSwitcher" : {
+    "language" : "langue :",
+    "en" : "English",
+    "fr" : "Français"
   }
 }

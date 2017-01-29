@@ -15,30 +15,30 @@ import {
 import { Translate }  from 'react-redux-i18n';
 
 export const LangSwitcher = ({ lang, setLang }: { lang:string; setLang:(lang:string) => void }) => {
-  const availableLangs:language[] = Object.keys(I18n._translations);
-  const langs:language[] = [
-    { code : "en", label : "english" },
-    { code : "fr", label : "français" }
-  ].filter((l:language):boolean => ~availableLangs.indexOf(l.code));
+  const availableLangs:string[] = Object.keys(I18n._translations);
 
-  const changeLocale = ( language:string ):void => {
-    moment.locale(language);
-    setLang(language);
+  const changeLocale = ( locale:string ):void => {
+    moment.locale(locale);
+    setLang(locale);
   };
 
   return (
     <ul className="langSwitcher">
-      <li className="navbar_item navbar_item-disabled">language:</li>
+      <li className="navbar_item navbar_item-disabled">
+        <Translate value="LangSwitcher.language"/>
+      </li>
       {
-        langs.map((l:language) =>
-          <li className={classNames('navbar_item', {'navbar_item-active':lang === l.code})}
-              key={l.code}
-              onClick={() => changeLocale(l.code)}>{l.label}</li>
+        availableLangs.map((locale:string) =>
+          <li className={classNames('navbar_item', {'navbar_item-active':lang === locale})}
+              key={locale}
+              onClick={() => changeLocale(locale)}>
+            <Translate value={`LangSwitcher.${locale}`}/>
+          </li>
         )
       }
     </ul>
   );
-}
+};
 
 export const NavBar = ({ lang, setLang }: { lang:string; setLang:(lang:string) => void }) => {
   const nav:link[] = [
@@ -60,7 +60,7 @@ export const NavBar = ({ lang, setLang }: { lang:string; setLang:(lang:string) =
       <LangSwitcher lang={lang} setLang={setLang}/>
     </nav>
   );
-}
+};
 
 const App = ({ lang, setLocale, children }:{ lang:string; setLocale:(lang:string) => void; children:React$Element<any> }) =>
   <section className="App">
