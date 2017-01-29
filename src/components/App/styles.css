@@ -23,3 +23,21 @@
 .navbar .navbar_item.navbar_item-active {
   background-color : rgba(0,0,0,.2);
 }
+
+.navbar .langSwitcher {
+  display         : inline-flex;
+  flex-flow       : row nowrap;
+  flex            : 1;
+  justify-content : flex-end;
+  list-style-type : none;
+  height          : 30px;
+}
+
+.navbar .langSwitcher li {
+  cursor : pointer;
+}
+
+.navbar .navbar_item-disabled:hover {
+  background-color : transparent;
+  cursor           : default;
+}

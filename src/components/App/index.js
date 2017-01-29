@@ -2,21 +2,48 @@
 
 import './styles.css';
 
-import React        from 'react';
-import { Link }     from 'react-router';
-import { connect }  from 'react-redux';
-import Helmet       from 'react-helmet';
+import React          from 'react';
+import { Link }       from 'react-router';
+import { connect }    from 'react-redux';
+import Helmet         from 'react-helmet';
+import classNames     from 'classnames';
+import {
+  I18n,
+  setLocale
+}                     from 'react-redux-i18n';
 
-const NavBar = () =>
+export const LangSwitcher = ({ lang, setLang }: { lang:string; setLang:(lang:string) => void }) => {
+  const availableLangs:language[] = Object.keys(I18n._translations);
+  const langs:language[] = [
+    { code : "en", label : "english" },
+    { code : "fr", label : "french" }
+  ].filter((l:language):boolean => ~availableLangs.indexOf(l.code));
+
+  return (
+    <ul className="langSwitcher">
+      <li className="navbar_item navbar_item-disabled">language:</li>
+      {
+        langs.map((l:language) =>
+          <li className={classNames('navbar_item', {'navbar_item-active':lang === l.code})}
+              key={l.code}
+              onClick={() => setLang(l.code)}>{l.label}</li>
+        )
+      }
+    </ul>
+  );
+}
+
+export const NavBar = ({ lang, setLang }: { lang:string; setLang:(lang:string) => void }) =>
   <nav className="navbar">
     <Link className="navbar_item" activeClassName={'navbar_item-active'} to="/">home</Link>
     <Link className="navbar_item" activeClassName={'navbar_item-active'} to="/beers">beers</Link>
+    <LangSwitcher lang={lang} setLang={setLang}/>
   </nav>;
 
-const App = ({ lang, children }:{ lang:string; children:React$Element<any> }) =>
+const App = ({ lang, setLocale, children }:{ lang:string; setLocale:(lang:string) => void; children:React$Element<any> }) =>
   <section className="App">
     <Helmet htmlAttributes={{ lang }}/>
-    <NavBar/>
+    <NavBar lang={lang} setLang={setLocale}/>
     { children }
   </section>;
 
@@ -25,5 +52,6 @@ const MapStateToProps = state => ({
 });
 
 export default connect(
-  MapStateToProps
+  MapStateToProps,
+  { setLocale }
 )(App);

@@ -1,3 +1,6 @@
 {
-  "lang" : "english"
+  "lang" : "english",
+  "HomePage" : {
+    "welcome" : "Welcome to the Beer App"
+  }
 }
