@@ -51,7 +51,6 @@ export class BeerDetails extends Component {
       const { name, first_brewed, tagline, description, food_pairing, brewers_tips, ingredients, image_url } = beer,
             { hops } = ingredients;
 
-
       body = <div className="beerDetails_data">
             <div className="img" style={{backgroundImage:`url(${image_url})`}}></div>
             <h2 className="name">{name} - {moment(first_brewed, 'MM/YYYY').format('MMMM Y')}</h2>
