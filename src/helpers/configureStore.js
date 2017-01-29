@@ -19,7 +19,6 @@ import {
   saveState,
   loadState
 }                         from '../helpers/localStorage';
-import isEmpty            from 'lodash/isEmpty';
 import {
   loadTranslations,
   setLocale,
@@ -34,8 +33,20 @@ import beerReducer        from '../reducers/beer';
 
 export let stopSavingToLocalStorage:unsubscriber|null = null;
 
-export const saveToLocalStorage = ( store:Object, stateToSave:Object = {}, interval:number = 1000 ):unsubscriber|null => {
-  return isEmpty(stateToSave) ? null : store.subscribe(throttle(() => saveState(stateToSave), interval));
+export const saveToLocalStorage = ( store:Object, interval:number = 1000 ):unsubscriber|null => {
+  return store.subscribe(throttle(() => saveState({
+      currentBeer : {
+        data : store.getState().currentBeer.data,
+        id   : store.getState().currentBeer.id
+      },
+      beers : {
+        data : store.getState().beers.data,
+        page : store.getState().beers.page
+      },
+      i18n : {
+        locale : store.getState().i18n.locale
+      }
+    }), interval));
 };
 
 const configureStore = ():Object => {
@@ -52,27 +63,13 @@ const configureStore = ():Object => {
   const store             = createStore(rootReducer, initialState, middlewares);
 
   // Local Storage Persistence
-  const stateToSave       = {
-    currentBeer : {
-      data : store.getState().currentBeer.data,
-      id   : store.getState().currentBeer.id
-    },
-    beers : {
-      data : store.getState().beers.data,
-      page : store.getState().beers.page
-    },
-    i18n : {
-      locale : store.getState().i18n.locale
-    }
-  };
-
   typeof stopSavingToLocalStorage === 'function' && stopSavingToLocalStorage();
-  stopSavingToLocalStorage = saveToLocalStorage(store, stateToSave);
+  stopSavingToLocalStorage = saveToLocalStorage(store);
 
   // Translation
   syncTranslationWithStore(store);
   store.dispatch(loadTranslations(translations));
-  store.dispatch(setLocale('en'));
+  !store.getState().i18n.locale && store.dispatch(setLocale('en'));
 
   return store;
 };
