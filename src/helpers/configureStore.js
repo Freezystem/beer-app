@@ -60,6 +60,9 @@ const configureStore = ():Object => {
     beers : {
       data : store.getState().beers.data,
       page : store.getState().beers.page
+    },
+    i18n : {
+      locale : store.getState().i18n.locale
     }
   };
 

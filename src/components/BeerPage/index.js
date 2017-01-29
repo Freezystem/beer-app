@@ -12,6 +12,7 @@ import {
   getBeers,
   requestState
 }                     from '../../reducers/beers';
+import { Translate }  from 'react-redux-i18n';
 
 export const Loading = () =>
   <p className="beerLoading">
@@ -21,15 +22,23 @@ export const Loading = () =>
   </p>;
 
 export const ErrorMessage = ({ text }:{text:string}) =>
-  <p className="beerPage_error">{text}</p>;
+  <p className="beerPage_error">
+    <Translate value={text}/>
+  </p>;
 
 export const Beer = ({ id, name, tagline, first_brewed, image_url }:beer) =>
   <li className="beerList_item">
     <Link className="beer" to={`/beers/${id}`}>
       <div className="beer_img" style={{backgroundImage:`url(${image_url})`}}/>
       <span className="beer_name">{name}</span>
-      <span className="beer_firstBrew">first brewed in {moment(first_brewed, 'MM/YYYY').format('MMMM Y')}</span>
+      <span className="beer_firstBrew">
+        <Translate value={'BeerPage.first_brewed'}
+                   date={moment(first_brewed, 'MM/YYYY').format('MMMM Y')}/>
+      </span>
       <em className="beer_tagline">{tagline}</em>
+      <span className="beer_button">
+        <Translate value={'BeerPage.see_details'}/>
+      </span>
     </Link>
   </li>;
 

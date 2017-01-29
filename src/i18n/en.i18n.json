@@ -2,5 +2,11 @@
   "lang" : "english",
   "HomePage" : {
     "welcome" : "Welcome to the Beer App"
+  },
+  "BeerPage" : {
+    "error_unknown" : "Sorry, an unknown error occurred...",
+    "error_no_beers" : "Oups! No beer at this page, sorry...",
+    "first_brewed" : "first brewed in %{date}",
+    "see_details" : "see details"
   }
 }

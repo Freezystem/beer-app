@@ -27,9 +27,12 @@
   text-decoration : none;
 }
 
-.beerList .beerList_item .beer:hover:before {
+.beerList .beerList_item .beer .beer_button {
+  display : none;
+}
+
+.beerList .beerList_item .beer:hover .beer_button {
   display          : block;
-  content          : 'see details';
   position         : absolute;
   bottom           : 0;
   width            : 100%;

@@ -36,7 +36,7 @@ export const getBeers = (
           return res.json();
         }
         else {
-          throw new Error(res.statusText || 'Sorry, an unknown error occurred...');
+          throw new Error(res.statusText || 'BeerPage.error_unknown');
         }
       })
       .then(( beers:beer[] ):void => {
@@ -44,7 +44,7 @@ export const getBeers = (
           dispatch(fetchBeersSuccess(beers));
         }
         else {
-          throw new Error('Oups! No beer at this page, sorry...');
+          throw new Error('BeerPage.error_no_beers');
         }
       })
       .catch(( err:Error ):void => dispatch(fetchBeersError(err)));
