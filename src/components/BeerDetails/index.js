@@ -17,6 +17,7 @@ import {
   getBeer,
   requestState
 }                     from '../../reducers/beer.js';
+import { Translate }  from 'react-redux-i18n';
 
 export class BeerDetails extends Component {
   props:{
@@ -39,12 +40,12 @@ export class BeerDetails extends Component {
   }
 
   render() {
-    const { beer, loading, error, push } = this.props;
+    const { beer, params, loading, error, push } = this.props;
 
     let body:React$Element<any> = <Loading/>;
 
     if ( error ) {
-      body = <ErrorMessage text={error.message}/>;
+      body = <ErrorMessage text={error.message} vars={{id : params.id}}/>;
     }
     else if ( !loading && !isEmpty(beer) ) {
       const { name, first_brewed, tagline, description, food_pairing, brewers_tips, ingredients, image_url } = beer,
@@ -57,17 +58,21 @@ export class BeerDetails extends Component {
             <em className="tagline">{tagline}</em>
             <p className="description">{description}</p>
             <p className="tips">
-              <span>brewing tips:</span>
+              <Translate value="BeerDetails.brewing_tips"/>
               <span>{brewers_tips}</span>
             </p>
             <div className="pairing">
-              <p>food pairing:</p>
+              <p>
+                <Translate value="BeerDetails.food_pairing"/>
+              </p>
               <ul>
                 {Array.isArray(food_pairing) && food_pairing.map(( pair, id ) => <li key={id}>{pair}</li>)}
               </ul>
             </div>
             <div className="hops">
-              <p>hops:</p>
+              <p>
+                <Translate value="BeerDetails.hops"/>
+              </p>
               <ul>
                 {Array.isArray(hops) && hops.map(( hop, id ) => <li key={id}>{hop.name} ({hop.amount.value}{hop.amount.unit})</li>)}
               </ul>

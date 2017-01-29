@@ -59,7 +59,8 @@
 
 .beerDetails .beerDetails_data .tips span:first-child {
   display          : inline-block;
-  min-width        : 100px;
+  white-space      : nowrap;
+  flex             : 1 1 100px;
   padding          : 10px;
   vertical-align   : middle;
   background-color : #c3c3c3;

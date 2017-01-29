@@ -6,6 +6,7 @@ import React          from 'react';
 import { Link }       from 'react-router';
 import { connect }    from 'react-redux';
 import Helmet         from 'react-helmet';
+import moment         from 'moment';
 import classNames     from 'classnames';
 import {
   I18n,
@@ -16,8 +17,13 @@ export const LangSwitcher = ({ lang, setLang }: { lang:string; setLang:(lang:str
   const availableLangs:language[] = Object.keys(I18n._translations);
   const langs:language[] = [
     { code : "en", label : "english" },
-    { code : "fr", label : "french" }
+    { code : "fr", label : "français" }
   ].filter((l:language):boolean => ~availableLangs.indexOf(l.code));
+
+  const changeLocale = ( language:string ):void => {
+    moment.locale(language);
+    setLang(language);
+  };
 
   return (
     <ul className="langSwitcher">
@@ -26,7 +32,7 @@ export const LangSwitcher = ({ lang, setLang }: { lang:string; setLang:(lang:str
         langs.map((l:language) =>
           <li className={classNames('navbar_item', {'navbar_item-active':lang === l.code})}
               key={l.code}
-              onClick={() => setLang(l.code)}>{l.label}</li>
+              onClick={() => changeLocale(l.code)}>{l.label}</li>
         )
       }
     </ul>

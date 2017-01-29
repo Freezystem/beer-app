@@ -21,9 +21,9 @@ export const Loading = () =>
     <span className="dot"></span>
   </p>;
 
-export const ErrorMessage = ({ text }:{text:string}) =>
+export const ErrorMessage = ({ text, vars = {} }:{ text:string; vars?:Object }) =>
   <p className="beerPage_error">
-    <Translate value={text}/>
+    <Translate value={text} {...vars}/>
   </p>;
 
 export const Beer = ({ id, name, tagline, first_brewed, image_url }:beer) =>
@@ -32,12 +32,12 @@ export const Beer = ({ id, name, tagline, first_brewed, image_url }:beer) =>
       <div className="beer_img" style={{backgroundImage:`url(${image_url})`}}/>
       <span className="beer_name">{name}</span>
       <span className="beer_firstBrew">
-        <Translate value={'BeerPage.first_brewed'}
+        <Translate value="BeerPage.first_brewed"
                    date={moment(first_brewed, 'MM/YYYY').format('MMMM Y')}/>
       </span>
       <em className="beer_tagline">{tagline}</em>
       <span className="beer_button">
-        <Translate value={'BeerPage.see_details'}/>
+        <Translate value="BeerPage.see_details"/>
       </span>
     </Link>
   </li>;
@@ -59,11 +59,12 @@ export class BeerPagination extends Component {
 
     return (
       <label className="beerPagination" htmlFor="page">
-        <span>Page:</span>
+        <Translate value="BeerPage.page"/>
         <input id="page"
                type="number"
                step="1"
                min="1"
+               max="15"
                ref={input => _label = input}
                defaultValue={page}
                onChange={debounce(() => changePage(parseInt(_label.value, 10) || 1), 500)}/>

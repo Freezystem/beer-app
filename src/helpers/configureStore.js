@@ -2,19 +2,19 @@
 
 import {
   browserHistory
-}                       from 'react-router';
+}                         from 'react-router';
 import {
   createStore,
   combineReducers,
   applyMiddleware,
   compose
-}                       from 'redux';
+}                         from 'redux';
 import {
   routerReducer,
   routerMiddleware
-}                       from 'react-router-redux';
-import thunkMiddleware  from 'redux-thunk';
-import throttle         from 'lodash/throttle';
+}                         from 'react-router-redux';
+import thunkMiddleware    from 'redux-thunk';
+import throttle           from 'lodash/throttle';
 import {
   saveState,
   loadState
@@ -26,6 +26,7 @@ import {
   i18nReducer
 }                         from 'react-redux-i18n';
 import translations       from '../i18n';
+import moment             from 'moment';
 
 // Reducers
 import beersReducer       from '../reducers/beers';
@@ -67,9 +68,11 @@ const configureStore = ():Object => {
   stopSavingToLocalStorage = saveToLocalStorage(store);
 
   // Translation
+  const locale = store.getState().i18n.locale;
   syncTranslationWithStore(store);
   store.dispatch(loadTranslations(translations));
-  !store.getState().i18n.locale && store.dispatch(setLocale('en'));
+  !locale && store.dispatch(setLocale('en'));
+  moment.locale(locale || 'en');
 
   return store;
 };

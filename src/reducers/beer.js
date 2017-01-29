@@ -42,7 +42,7 @@ export const getBeer = (
             return res.json();
           }
           else {
-            throw new Error(res.statusText || `Sorry, can't get beer #${id}...`);
+            throw new Error(res.statusText || 'BeerDetails.error_api');
           }
         })
         .then(( beers:beer[] ):void => {
@@ -50,7 +50,7 @@ export const getBeer = (
             dispatch(fetchBeerSuccess(beers[0]));
           }
           else {
-            throw new Error(`no beer with id:${id}`);
+            throw new Error('BeerDetails.error_no_match');
           }
         })
         .catch(( err:Error ):void => dispatch(fetchBeerError(err)));

@@ -4,9 +4,17 @@
     "welcome" : "Bienvenue sur la Beer App"
   },
   "BeerPage" : {
-    "error_unknown" : "Désolé, une erreur inconnue est survenue...",
+    "error_api" : "Désolé, une erreur inconnue est survenue...",
     "error_no_beers" : "Oups! pas de bière sur cette page, désolé...",
     "first_brewed" : "premier brassage en %{date}",
-    "see_details" : "voir les details"
+    "see_details" : "voir les details",
+    "page" : "page :"
+  },
+  "BeerDetails" : {
+    "error_api" : "Désolé, impossible de récupérer la bière #%{id}...",
+    "error_no_match" : "Oups! Pas de bière avec l'id:%{id}",
+    "brewing_tips" : "conseil de brassage :",
+    "food_pairing" : "plats associés :",
+    "hops" : "houblons :"
   }
 }

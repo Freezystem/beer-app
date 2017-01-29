@@ -36,7 +36,7 @@ export const getBeers = (
           return res.json();
         }
         else {
-          throw new Error(res.statusText || 'BeerPage.error_unknown');
+          throw new Error(res.statusText || 'BeerPage.error_api');
         }
       })
       .then(( beers:beer[] ):void => {

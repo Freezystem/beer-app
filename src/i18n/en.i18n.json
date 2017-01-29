@@ -4,9 +4,17 @@
     "welcome" : "Welcome to the Beer App"
   },
   "BeerPage" : {
-    "error_unknown" : "Sorry, an unknown error occurred...",
+    "error_api" : "Sorry, an unknown error occurred...",
     "error_no_beers" : "Oups! No beer at this page, sorry...",
     "first_brewed" : "first brewed in %{date}",
-    "see_details" : "see details"
+    "see_details" : "see details",
+    "page" : "page:"
+  },
+  "BeerDetails" : {
+    "error_api" : "Sorry, can't get beer #%{id}...",
+    "error_no_match" : "Oups! No beer with id:%{id}",
+    "brewing_tips" : "brewing tips:",
+    "food_pairing" : "food pairing:",
+    "hops" : "hops:"
   }
 }
