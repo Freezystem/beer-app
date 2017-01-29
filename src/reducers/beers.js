@@ -47,7 +47,7 @@ export const getBeers = (
           throw new Error('Oups! No beer at this page, sorry...');
         }
       })
-      .catch(err => dispatch(fetchBeersError(err)));
+      .catch(( err:Error ):void => dispatch(fetchBeersError(err)));
   }
 };
 

@@ -53,7 +53,7 @@ export const getBeer = (
             throw new Error(`no beer with id:${id}`);
           }
         })
-        .catch(err => dispatch(fetchBeerError(err)));
+        .catch(( err:Error ):void => dispatch(fetchBeerError(err)));
     }
   }
 };

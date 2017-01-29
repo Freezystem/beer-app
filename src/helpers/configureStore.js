@@ -18,12 +18,19 @@ import throttle         from 'lodash/throttle';
 import {
   saveState,
   loadState
-}                       from '../helpers/localStorage';
-import isEmpty          from 'lodash/isEmpty';
+}                         from '../helpers/localStorage';
+import isEmpty            from 'lodash/isEmpty';
+import {
+  loadTranslations,
+  setLocale,
+  syncTranslationWithStore,
+  i18nReducer
+}                         from 'react-redux-i18n';
+import translations       from '../i18n';
 
 // Reducers
-import beersReducer     from '../reducers/beers';
-import beerReducer      from '../reducers/beer';
+import beersReducer       from '../reducers/beers';
+import beerReducer        from '../reducers/beer';
 
 export let stopSavingToLocalStorage:unsubscriber|null = null;
 
@@ -37,11 +44,14 @@ const configureStore = ():Object => {
   const rootReducer       = combineReducers({
     currentBeer : beerReducer,
     beers       : beersReducer,
-    routing     : routerReducer
+    routing     : routerReducer,
+    i18n        : i18nReducer
   });
   const routingMiddleware = routerMiddleware(browserHistory);
   const middlewares       = composer(applyMiddleware(routingMiddleware, thunkMiddleware));
   const store             = createStore(rootReducer, initialState, middlewares);
+
+  // Local Storage Persistence
   const stateToSave       = {
     currentBeer : {
       data : store.getState().currentBeer.data,
@@ -55,6 +65,11 @@ const configureStore = ():Object => {
 
   typeof stopSavingToLocalStorage === 'function' && stopSavingToLocalStorage();
   stopSavingToLocalStorage = saveToLocalStorage(store, stateToSave);
+
+  // Translation
+  syncTranslationWithStore(store);
+  store.dispatch(loadTranslations(translations));
+  store.dispatch(setLocale('en'));
 
   return store;
 };
