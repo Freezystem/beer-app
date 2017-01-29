@@ -64,24 +64,27 @@ const beersReducer = (
 ):beersState => {
   switch ( action.type ) {
     case FETCH_BEERS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         requestState : requestState.PENDING,
         data         : [],
         page         : action.page,
         error        : null
-      });
+      };
     case FETCH_BEERS_SUCCESS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         requestState : requestState.FULFILLED,
         data         : action.data,
         error        : null
-      });
+      };
     case FETCH_BEERS_ERROR:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         requestState : requestState.REJECTED,
         data         : [],
         error        : action.error
-      });
+      };
     default:
       return state;
   }
