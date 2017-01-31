@@ -84,7 +84,7 @@ export class BeerDetails extends Component {
   }
 }
 
-const MapStateToProps = (state, { params }) => ({
+const MapStateToProps = ( state:Object ) => ({
   beers   : state.beers.data,
   beer    : state.currentBeer.data,
   loading : state.currentBeer.requestState === requestState.PENDING,
