@@ -12,7 +12,10 @@ import {
   getBeers,
   requestState
 }                     from '../../reducers/beers';
-import { Translate }  from 'react-redux-i18n';
+import {
+  Translate,
+  Localize
+}                     from 'react-redux-i18n';
 
 export const Loading = () =>
   <p className="beerLoading">
@@ -32,8 +35,8 @@ export const Beer = ({ id, name, tagline, first_brewed, image_url }:beer) =>
       <div className="beer_img" style={{backgroundImage:`url(${image_url})`}}/>
       <span className="beer_name">{name}</span>
       <span className="beer_firstBrew">
-        <Translate value="BeerPage.first_brewed"
-                   date={moment(first_brewed, 'MM/YYYY').format('MMMM Y')}/>
+        <Translate value="BeerPage.first_brewed"/>
+        <Localize value={moment(first_brewed, 'MM/YYYY').format()} dateFormat="BeerPage.date_format"/>
       </span>
       <em className="beer_tagline">{tagline}</em>
       <span className="beer_button">

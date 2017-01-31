@@ -6,13 +6,15 @@
   "BeerPage" : {
     "error_api" : "Désolé, une erreur inconnue est survenue...",
     "error_no_beers" : "Oups! pas de bière sur cette page, désolé...",
-    "first_brewed" : "créée en %{date}",
+    "first_brewed" : "créée en ",
+    "date_format" : "MMM Y",
     "see_details" : "voir les details",
     "page" : "page :"
   },
   "BeerDetails" : {
     "error_api" : "Désolé, impossible de récupérer la bière #%{id}...",
     "error_no_match" : "Oups! Pas de bière avec l'id:%{id}",
+    "date_format" : "MMMM Y",
     "brewing_tips" : "conseil de brassage :",
     "food_pairing" : "plats associés :",
     "hops" : "houblons :"

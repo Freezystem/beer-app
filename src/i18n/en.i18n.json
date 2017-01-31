@@ -6,13 +6,15 @@
   "BeerPage" : {
     "error_api" : "Sorry, an unknown error occurred...",
     "error_no_beers" : "Oups! No beer at this page, sorry...",
-    "first_brewed" : "first brewed in %{date}",
+    "first_brewed" : "first brewed in ",
+    "date_format" : "MMM Y",
     "see_details" : "see details",
     "page" : "page:"
   },
   "BeerDetails" : {
     "error_api" : "Sorry, can't get beer #%{id}...",
     "error_no_match" : "Oups! No beer with id:%{id}",
+    "date_format" : "MMMM Y",
     "brewing_tips" : "brewing tips:",
     "food_pairing" : "food pairing:",
     "hops" : "hops:"

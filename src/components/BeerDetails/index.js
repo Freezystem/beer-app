@@ -17,7 +17,10 @@ import {
   getBeer,
   requestState
 }                     from '../../reducers/beer.js';
-import { Translate }  from 'react-redux-i18n';
+import {
+  Translate,
+  Localize
+}                     from 'react-redux-i18n';
 
 export class BeerDetails extends Component {
   props:{
@@ -53,7 +56,10 @@ export class BeerDetails extends Component {
 
       body = <div className="beerDetails_data">
             <div className="img" style={{backgroundImage:`url(${image_url})`}}></div>
-            <h2 className="name">{name} - {moment(first_brewed, 'MM/YYYY').format('MMMM Y')}</h2>
+            <h2 className="name">
+              <span>{name} - </span>
+              <Localize value={moment(first_brewed, 'MM/YYYY').format()} dateFormat="BeerDetails.date_format"/>
+            </h2>
             <em className="tagline">{tagline}</em>
             <p className="description">{description}</p>
             <p className="tips">
