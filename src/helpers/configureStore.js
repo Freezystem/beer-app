@@ -32,7 +32,7 @@ import moment             from 'moment';
 import beersReducer       from '../reducers/beers';
 import beerReducer        from '../reducers/beer';
 
-export let stopSavingToLocalStorage:unsubscriber|null = null;
+export let stopSavingToLocalStorage:noop|null = null;
 
 export const saveToLocalStorage = ( store:Object, interval:number = 1000 ):unsubscriber|null => {
   return store.subscribe(throttle(() => saveState({

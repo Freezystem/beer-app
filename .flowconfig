@@ -1,5 +1,10 @@
 [include]
-./src/**/*.js
-
+src/**/*.js
+[ignore]
+node_modules
 [libs]
-./src/helpers/flowGlobals.js
+flow-typed
+[options]
+module.use_strict=true
+[version]
+0.38.0

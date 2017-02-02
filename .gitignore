@@ -9,6 +9,9 @@ coverage
 # production
 build
 
+# flow-typed libs
+flow-typed/npm
+
 # misc
 .DS_Store
 .env

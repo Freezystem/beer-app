@@ -26,7 +26,7 @@ export const fetchBeerError    = ( error:Object ):action<{ error:Error }> =>
 export const getBeer = (
   id:number,
   beers:beer[] = []
-) => {
+):noop => {
   return ( dispatch:dispatch ):void => {
     dispatch(fetchBeer(id));
 
