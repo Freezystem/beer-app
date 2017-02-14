@@ -55,6 +55,8 @@ export class BeerPagination extends Component {
     page:number;
     changePage:(page:number) => void
   };
+
+  static displayName = 'BeerPagination';
   
   render() {
     const { page, changePage } = this.props;
@@ -86,6 +88,8 @@ export class BeerPage extends Component {
     params:Object;
     children:React$Element<any>
   };
+
+  static displayName = 'BeerPage';
 
   componentDidMount() {
     const { beers, page, getBeers } = this.props;

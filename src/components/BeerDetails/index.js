@@ -33,6 +33,8 @@ export class BeerDetails extends Component {
     push:(url:string) => void
   };
 
+  static displayName = 'BeerDetails';
+
   componentDidMount() {
     const { beers, beer, params } = this.props,
           id = parseInt(params.id, 10);
