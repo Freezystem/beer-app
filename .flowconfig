@@ -7,4 +7,4 @@ flow-typed
 [options]
 module.use_strict=true
 [version]
-0.38.0
+0.39.0
