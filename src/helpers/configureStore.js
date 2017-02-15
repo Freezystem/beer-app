@@ -14,7 +14,7 @@ import {
   routerMiddleware
 }                         from 'react-router-redux';
 import thunkMiddleware    from 'redux-thunk';
-import throttle           from 'lodash/throttle';
+import { throttle }       from 'lodash';
 import {
   saveState,
   loadState
@@ -32,9 +32,9 @@ import moment             from 'moment';
 import beersReducer       from '../reducers/beers';
 import beerReducer        from '../reducers/beer';
 
-export let stopSavingToLocalStorage:noop|null = null;
+export let stopSavingToLocalStorage:Function|null = null;
 
-export const saveToLocalStorage = ( store:Object, interval:number = 1000 ):unsubscriber|null => {
+export const saveToLocalStorage = ( store:Object, interval:number = 1000 ):Function|null => {
   return store.subscribe(throttle(() => saveState({
       currentBeer : {
         data : store.getState().currentBeer.data,

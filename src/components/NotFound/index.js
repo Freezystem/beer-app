@@ -1,10 +1,13 @@
 // @flow
 
-import React  from 'react';
+import React         from 'react';
+import { Translate } from 'react-redux-i18n';
 
 const NotFound = () =>
   <section className="notFound" style={{padding:'40px 10px'}}>
-    <h1>error 404: Page Not Found</h1>
+    <h1>
+      <Translate value="NotFound.error" />
+    </h1>
   </section>;
 
 export default NotFound;

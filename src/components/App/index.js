@@ -6,7 +6,6 @@ import React          from 'react';
 import { Link }       from 'react-router';
 import { connect }    from 'react-redux';
 import Helmet         from 'react-helmet';
-import moment         from 'moment';
 import classNames     from 'classnames';
 import {
   I18n,
@@ -18,7 +17,6 @@ export const LangSwitcher = ({ lang, setLang }: { lang:string; setLang:(lang:str
   const availableLangs:string[] = Object.keys(I18n._translations);
 
   const changeLocale = ( locale:string ):void => {
-    moment.locale(locale);
     setLang(locale);
   };
 

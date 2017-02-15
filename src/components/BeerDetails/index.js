@@ -7,12 +7,11 @@ import React, {
 }                     from 'react';
 import { connect }    from 'react-redux';
 import { push }       from 'react-router-redux';
-import isEmpty        from 'lodash/isEmpty';
+import { isEmpty }    from 'lodash';
 import {
   Loading,
   ErrorMessage
 }                     from '../BeerPage';
-import moment         from 'moment';
 import {
   getBeer,
   requestState
@@ -60,7 +59,7 @@ export class BeerDetails extends Component {
             <div className="img" style={{backgroundImage:`url(${image_url})`}}></div>
             <h2 className="name">
               <span>{name} - </span>
-              <Localize value={moment(first_brewed, 'MM/YYYY').format()} dateFormat="BeerDetails.date_format"/>
+              <Localize value={first_brewed} dateFormat="BeerDetails.date_format" options={{parseFormat:'MM/YYYY'}}/>
             </h2>
             <em className="tagline">{tagline}</em>
             <p className="description">{description}</p>

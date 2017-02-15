@@ -6,8 +6,7 @@ import React, {
 }                     from 'react';
 import { connect }    from 'react-redux';
 import { Link }       from 'react-router';
-import debounce       from 'lodash/debounce';
-import moment         from 'moment';
+import { debounce }   from 'lodash';
 import {
   getBeers,
   requestState
@@ -36,12 +35,10 @@ export const Beer = ({ id, name, tagline, first_brewed, image_url }:beer) =>
       <span className="beer_name">{name}</span>
       <span className="beer_firstBrew">
         <Translate value="BeerPage.first_brewed"/>
-        <Localize value={moment(first_brewed, 'MM/YYYY').format()} dateFormat="BeerPage.date_format"/>
+        <Localize value={first_brewed} dateFormat="BeerPage.date_format" options={{parseFormat:'MM/YYYY'}}/>
       </span>
       <em className="beer_tagline">{tagline}</em>
-      <span className="beer_button">
-        <Translate value="BeerPage.see_details"/>
-      </span>
+      <Translate className="beer_button" value="BeerPage.see_details"/>
     </Link>
   </li>;
 

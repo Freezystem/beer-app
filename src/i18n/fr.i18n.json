@@ -27,5 +27,8 @@
     "language" : "langue :",
     "en" : "English",
     "fr" : "Français"
+  },
+  "NotFound" : {
+    "error" : "erreur 404 : Page Introuvable"
   }
 }

@@ -26,7 +26,7 @@ export const fetchBeersError    = ( error:Object ):action<{ error:Error }> =>
 export const getBeers = (
   page:number = 1,
   perPage:number = 20
-):noop => {
+):Function => {
   return ( dispatch:dispatch ):void => {
     dispatch(fetchBeers(page));
 

@@ -1,10 +1,13 @@
 [include]
 src/**/*.js
 [ignore]
-node_modules
+<PROJECT_ROOT>/__tests__/.*
+<PROJECT_ROOT>/node_modules/.*
+<PROJECT_ROOT>/build/.*
+<PROJECT_ROOT>/public/.*
 [libs]
 flow-typed
 [options]
 module.use_strict=true
 [version]
-0.39.0
+>=0.39.0
