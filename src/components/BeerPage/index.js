@@ -16,6 +16,8 @@ import {
   Localize
 }                     from 'react-redux-i18n';
 
+const PUBLIC_URL:string = process.env.PUBLIC_URL || '';
+
 export const Loading = () =>
   <p className="beerLoading">
     <span className="dot"></span>
@@ -31,7 +33,7 @@ export const ErrorMessage = ({ text, vars = {} }:{ text:string; vars?:Object }) 
 export const Beer = ({ id, name, tagline, first_brewed, image_url }:beer) =>
   <li className="beerList_item">
     <Link className="beer" to={`/beers/${id}`}>
-      <div className="beer_img" style={{backgroundImage:`url(${image_url})`}}/>
+      <div className="beer_img" style={{backgroundImage:`url(${image_url}), url(${PUBLIC_URL}/beer.jpg)`}}/>
       <span className="beer_name">{name}</span>
       <span className="beer_firstBrew">
         <Translate value="BeerPage.first_brewed"/>

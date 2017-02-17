@@ -21,6 +21,8 @@ import {
   Localize
 }                     from 'react-redux-i18n';
 
+const PUBLIC_URL:string = process.env.PUBLIC_URL || '';
+
 export class BeerDetails extends Component {
   props:{
     loading:boolean;
@@ -56,7 +58,7 @@ export class BeerDetails extends Component {
             { hops } = ingredients;
 
       body = <div className="beerDetails_data">
-            <div className="img" style={{backgroundImage:`url(${image_url})`}}></div>
+            <div className="img" style={{backgroundImage:`url(${image_url}), url(${PUBLIC_URL}/beer.jpg)`}}></div>
             <h2 className="name">
               <span>{name} - </span>
               <Localize value={first_brewed} dateFormat="BeerDetails.date_format" options={{parseFormat:'MM/YYYY'}}/>
